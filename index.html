@@ -3,13 +3,117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ай-ай-ай.</title>
+<title>Привет</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    /* Вставляем картинку на фон */
+    background: #0e1621 url('i.jpg') no-repeat center center;
+    background-size: cover; /* Растягиваем на весь экран */
+    overflow: hidden;
+  }
+
+  /* Затемнение поверх фона, чтобы сообщение было читаемым */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 9999;
+  }
+  .overlay.show {
+    opacity: 1;
+  }
+
+  /* Сама плашка-уведомление */
+  .dialog {
+    background: #232d3a;
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 20px 22px 8px;
+    max-width: 360px;
+    width: 100%;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+  .overlay.show .dialog {
+    transform: scale(1);
+  }
+
+  .dialog .title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+
+  .dialog .text {
+    font-size: 15px;
+    line-height: 1.4;
+    color: #d8dde4;
+  }
+
+  .dialog .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 20px;
+    padding-bottom: 8px;
+  }
+
+  .dialog button {
+    background: transparent;
+    border: none;
+    color: #5eb5f7;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    font-family: inherit;
+  }
+  .dialog button:hover {
+    background: rgba(94, 181, 247, 0.12);
+  }
+</style>
 </head>
 <body>
-<script>
-  window.addEventListener("load", () => {
-    setTimeout(() => alert("Эх ты, Иллуги. Успокойся уже."), 300);
-  });
-</script>
+
+  <div class="overlay" id="overlay">
+    <div class="dialog">
+      <div class="title">эх ты, Иллуги</div>
+      <div class="text">Сообщение от отправителя ссылки.</div>
+      <div class="actions">
+        <button id="okBtn">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('overlay');
+    const okBtn = document.getElementById('okBtn');
+
+    window.addEventListener('load', () => {
+      setTimeout(() => overlay.classList.add('show'), 200);
+    });
+
+    okBtn.addEventListener('click', () => {
+      overlay.classList.remove('show');
+    });
+  </script>
 </body>
 </html>
