@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Привет</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: #f4f4f8;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  /* Всплывающее уведомление */
+  #toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%, -120px);
+    background: #808080;      /* серый фон */
+    color: #ffffff;           /* белый текст */
+    padding: 14px 44px 14px 22px;  /* справа больше места под крестик */
+    border-radius: 10px;
+    font-size: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    opacity: 0;
+    transition: all 0.4s ease;
+    z-index: 9999;
+    max-width: 90vw;
+    text-align: center;
+  }
+  #toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  /* Кнопка закрытия (крестик) */
+  #toast .close {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 0;
+    opacity: 0.7;
+    transition: 0.2s;
+  }
+  #toast .close:hover {
+    opacity: 1;
+    background: rgba(255,255,255,0.2);
+  }
+</style>
+</head>
+<body>
+
+  <div id="toast">
+    <span>эх ты, Иллуги</span>
+    <button class="close" aria-label="Закрыть">&times;</button>
+  </div>
+
+  <script>
+    const toast = document.getElementById('toast');
+    const closeBtn = toast.querySelector('.close');
+
+    // Показываем уведомление после открытия страницы
+    window.addEventListener('load', () => {
+      setTimeout(() => toast.classList.add('show'), 300);
+    });
+
+    // Закрытие по крестику
+    closeBtn.addEventListener('click', () => {
+      toast.classList.remove('show');
+    });
+  </script>
+</body>
+</html>
